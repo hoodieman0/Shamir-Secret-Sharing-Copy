@@ -33,4 +33,6 @@ class ShamirSecret {
         void lagrangeInterpolate();
 
         void secretReconstruct();
+
+        vector<Coordinate2D> getShares() { return shares; }
 };
