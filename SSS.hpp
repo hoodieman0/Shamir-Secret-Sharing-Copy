@@ -26,7 +26,7 @@ class ShamirSecret {
     public:
         ShamirSecret(int secret, int min, int max) : secret(secret), minShares(min), maxShares(max) {} ;
 
-        // fills the shares vector with the 
+        // fills the polyCoefficients vector and shares vector with their needed values 
         void makeSecretShares();
 
         // find the y value at x = 0, i.e. the secret
