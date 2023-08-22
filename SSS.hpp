@@ -1,17 +1,9 @@
 #include <vector>
+#include "Coordiante2D.hpp"
 
 using namespace std;
 
-struct Coordinate2D {
-    private:
-        int x;
-        int y;
 
-    public:
-        Coordinate2D(int x, int y) : x(x), y(y) {}
-        int getX() { return x; }
-        int getY() { return y; }
-};
 
 class ShamirSecret {
     private:
