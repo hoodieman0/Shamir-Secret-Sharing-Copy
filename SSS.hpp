@@ -35,9 +35,9 @@ class ShamirSecret {
         // find the y value at x = 0, i.e. the secret
         void lagrangeInterpolate();
 
-        bool secretReconstruct();
+        bool secretReconstruct(const vector<Coordinate2D> shareID) const;
 
-        vector<Coordinate2D> getShares() { return shares; }
+        vector<Coordinate2D> getShares() const { return shares; }
 };
 
 #endif SSS_HPP

@@ -39,21 +39,13 @@ makeSecretShares() {
 }
 
 bool ShamirSecret::
-secretReconstruct() {
-    vector<Coordinate2D> sharesToUse; // TODO remove testing values
+secretReconstruct(const vector<Coordinate2D> shareID) const {
     vector<Fraction> piFracs;
 
     Fraction fracProduct (1, 1);
     Fraction sum (0, 1);
 
     int reconstruction;
-
-    // testing values
-    // TODO add inputs to function
-    for (int i = 0; i < minShares; i++) {
-        sharesToUse.push_back(shares[i]);
-        cout << shares[i] << endl; // TODO remove debugging statements
-    }
 
     // https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing#Computationally_efficient_approach
     // this page does not explain how it simplifies the equation, but it is still used here
@@ -62,8 +54,8 @@ secretReconstruct() {
         for (int j = 0; j < minShares; j++) {
 
             // setup the fractions for multiplication, without 0/0 from x_i - x_i
-            if (sharesToUse[i].getX() != sharesToUse[j].getX()){
-                piFracs.push_back(Fraction(sharesToUse[j].getX(), sharesToUse[j].getX() - sharesToUse[i].getX()));
+            if (shareID[i].getX() != shareID[j].getX()){
+                piFracs.push_back(Fraction(shareID[j].getX(), shareID[j].getX() - shareID[i].getX()));
             }
         }
         // multiply the series of fractions
@@ -72,7 +64,7 @@ secretReconstruct() {
         }
 
         // multiply y_i by fracProduct, add it to the sum, and repeat for all i
-        sum = sum + (fracProduct * sharesToUse[i].getY());
+        sum = sum + (fracProduct * shareID[i].getY());
 
         // clear for new values
         piFracs.clear();
