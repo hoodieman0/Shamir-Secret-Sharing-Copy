@@ -1,3 +1,6 @@
+#ifndef MATHNOT_HPP
+#define MATHNOT_HPP
+
 #include <iostream>
 
 using namespace std;
@@ -47,3 +50,5 @@ struct Fraction {
 inline ostream& operator<<(ostream& out, Fraction& frac) {
    return out << frac.getNumerator() << " / " << frac.getDenominator();
 }
+
+#endif MATHNOT_HPP

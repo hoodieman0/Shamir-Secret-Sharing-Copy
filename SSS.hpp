@@ -1,3 +1,6 @@
+#ifndef SSS_HPP
+#define SSS_HPP
+
 #include <vector>
 #include <random>
 #include <iostream>
@@ -36,3 +39,5 @@ class ShamirSecret {
 
         vector<Coordinate2D> getShares() { return shares; }
 };
+
+#endif SSS_HPP
