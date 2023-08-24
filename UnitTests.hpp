@@ -1,3 +1,6 @@
+#ifndef UTEST_HPP
+#define UTEST_HPP
+
 #include <iostream>
 #include "SSS.hpp"
 
@@ -66,3 +69,5 @@ int UnitTest_RunAll(){
 
     return 0;
 }
+
+#endif UTEST_HPP
