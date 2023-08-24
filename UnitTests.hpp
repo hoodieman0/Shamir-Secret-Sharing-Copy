@@ -24,12 +24,25 @@ int UnitTest_MakeSecretShares(){
     return 0;
 }
 
+int UnitTest_ReconstructSecret() {
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        handler.makeSecretShares();
+        bool isSuccess = handler.secretReconstruct();
+
+        if (!isSuccess) throw "Secret Failed to reconstruct";
+    } catch (...) { return 1; }
+    
+    return 0;
+}
+
 int UnitTest_RunAll(){
     int passed = 0;
     int failed = 0;
 
     cout << "Running all unit tests for Shamir Secret Sharing class" << endl;
     cout << "------------------------------------------------------" << endl;
+    
     cout << "Running Unit Test - ClassCreation..." << endl;
     if (UnitTest_ClassCreation()) { cout << "Unit Test - Class Creation -> Failed Test" << endl; failed++;}
     else { cout << "Unit Test - Class Creation -> Passed Test" << endl; passed++; }
@@ -39,6 +52,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - MakeSecretShares..." << endl;
     if (UnitTest_MakeSecretShares()) { cout << "Unit Test - MakeSecretShares -> Failed Test" << endl; failed++; }
     else { cout << "Unit Test - MakeSecretShares -> Passed Test" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - ReconstructSecret..." << endl;
+    if (UnitTest_ReconstructSecret()) { cout << "Unit Test - ReconstructSecret -> Failed Test" << endl; failed++; }
+    else { cout << "Unit Test - ReconstructSecret -> Passed Test" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
