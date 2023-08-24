@@ -26,6 +26,22 @@ struct Fraction {
         Fraction(int numerator, int denominator) : numerator(numerator), denominator(denominator) {}
         int getNumerator() { return numerator; }
         int getDenominator() { return denominator; }
+
+        Fraction operator+ (Fraction f) {
+            Fraction temp((numerator * f.getDenominator()) + (denominator * f.getNumerator()), denominator * f.getDenominator());
+            return temp;
+        }
+
+        Fraction operator* (Fraction f) {
+            Fraction temp(numerator * f.getNumerator(), denominator * f.getDenominator());
+            return temp;
+        }
+
+        Fraction operator* (int x) {
+            Fraction temp(numerator * x, denominator);
+            return temp;
+        }
+
 };
 
 inline ostream& operator<<(ostream& out, Fraction& frac) {
