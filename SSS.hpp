@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 
-#include "Coordiante2D.hpp"
+#include "MathNotation.hpp"
 
 using namespace std;
 
