@@ -32,7 +32,7 @@ class ShamirSecret {
         // find the y value at x = 0, i.e. the secret
         void lagrangeInterpolate();
 
-        void secretReconstruct();
+        bool secretReconstruct();
 
         vector<Coordinate2D> getShares() { return shares; }
 };
