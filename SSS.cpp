@@ -63,6 +63,7 @@ secretReconstruct(const vector<Coordinate2D> shareID) const {
         }
 
         // multiply y_i by fracProduct, add it to the sum, and repeat for all i
+        // in combination with the fracProduct loop, this is the Lagrange Interpolation
         sum = sum + (fracProduct * shareID[i].getY());
 
         // clear for new values
