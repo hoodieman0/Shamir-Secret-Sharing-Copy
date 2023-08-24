@@ -12,8 +12,8 @@ struct Coordinate2D {
 
     public:
         Coordinate2D(int x, int y) : x(x), y(y) {}
-        int getX() { return x; }
-        int getY() { return y; }
+        int getX() const { return x; }
+        int getY() const { return y; }
 };
 
 inline ostream& operator<<(ostream& out, Coordinate2D& coord) {
@@ -27,8 +27,8 @@ struct Fraction {
 
     public:
         Fraction(int numerator, int denominator) : numerator(numerator), denominator(denominator) {}
-        int getNumerator() { return numerator; }
-        int getDenominator() { return denominator; }
+        int getNumerator() const { return numerator; }
+        int getDenominator() const { return denominator; }
 
         Fraction operator+ (Fraction f) {
             Fraction temp((numerator * f.getDenominator()) + (denominator * f.getNumerator()), denominator * f.getDenominator());
