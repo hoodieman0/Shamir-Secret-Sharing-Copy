@@ -2,7 +2,9 @@
 #define UTEST_HPP
 
 #include <iostream>
+#include <vector>
 #include "SSS.hpp"
+#include "MathNotation.hpp"
 
 #define SECRET 1337
 #define MINSHARES 3
@@ -31,7 +33,11 @@ int UnitTest_ReconstructSecret() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
         handler.makeSecretShares();
-        bool isSuccess = handler.secretReconstruct();
+
+        vector<Coordinate2D> handlerShares = handler.getShares();
+
+
+        bool isSuccess = handler.secretReconstruct(handlerShares);
 
         if (!isSuccess) throw "Secret Failed to reconstruct";
     } catch (...) { return 1; }
