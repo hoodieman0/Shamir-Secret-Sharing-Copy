@@ -12,6 +12,12 @@
 
 using namespace std;
 
+/*
+\u2713 is a check mark
+\u274c is a cross mark
+\u2bd1 is a question mark
+*/
+
 int UnitTest_ClassCreation() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
@@ -53,25 +59,25 @@ int UnitTest_RunAll(){
     cout << "------------------------------------------------------" << endl;
     
     cout << "Running Unit Test - ClassCreation..." << endl;
-    if (UnitTest_ClassCreation()) { cout << "Unit Test - Class Creation -> Failed Test" << endl; failed++;}
-    else { cout << "Unit Test - Class Creation -> Passed Test" << endl; passed++; }
+    if (UnitTest_ClassCreation()) { cout << "Unit Test - Class Creation -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - Class Creation -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
 
     cout << "Running Unit Test - MakeSecretShares..." << endl;
-    if (UnitTest_MakeSecretShares()) { cout << "Unit Test - MakeSecretShares -> Failed Test" << endl; failed++; }
-    else { cout << "Unit Test - MakeSecretShares -> Passed Test" << endl; passed++; }
+    if (UnitTest_MakeSecretShares()) { cout << "Unit Test - MakeSecretShares -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - MakeSecretShares -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
 
     cout << "Running Unit Test - ReconstructSecret..." << endl;
-    if (UnitTest_ReconstructSecret()) { cout << "Unit Test - ReconstructSecret -> Failed Test" << endl; failed++; }
-    else { cout << "Unit Test - ReconstructSecret -> Passed Test" << endl; passed++; }
+    if (UnitTest_ReconstructSecret()) { cout << "Unit Test - ReconstructSecret -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - ReconstructSecret -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
-    cout << "Passed Tests: " << passed << endl;
-    cout << "Failed Tests: " << failed << endl;
+    cout << "\u2713 Passed Tests: " << passed << endl;
+    cout << "\u274c Failed Tests: " << failed << endl;
 
     return 0;
 }
