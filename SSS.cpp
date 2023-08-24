@@ -5,7 +5,9 @@ solvePolynomialAtX(int x) {
     int result = 0;
     int exponent = 0;
     int var = 0;
-
+    
+    // a polynomial looks like f(x) = 100 + 5x + x^2
+    // var is the inputted x with an exponent, coeff is like 5, and result is f(x)
     for (int coeff : polyCoefficients) {
         var = int(pow(x, exponent));
         exponent++;
@@ -24,17 +26,14 @@ makeSecretShares() {
     // input the degree 0 polynomial
     polyCoefficients.push_back(secret);
 
+    // randomly pick coefficients for the polynomial
     for (int i = 0; i < minShares - 1; i++) {
         polyCoefficients.push_back(dist100(rng));
     }
 
+    // create the shares and put them in the variable
     for (int x = 1; x <= maxShares; x++) {
         shares.push_back(Coordinate2D (x, solvePolynomialAtX(x)));
-        
-    }
-
-    for (Coordinate2D pair : shares) {
-        cout << pair << endl; // TODO remove debugging statements
     }
 }
 
