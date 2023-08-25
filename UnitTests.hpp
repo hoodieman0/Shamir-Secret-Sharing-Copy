@@ -22,8 +22,8 @@ int UnitTest_ClassCreation() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
     } 
-    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(...) { return 1; }
 
     return 0;
@@ -34,8 +34,8 @@ int UnitTest_MakeSecretShares(){
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
         handler.makeSecretShares();
     }  
-    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(...) { return 1; }
 
     return 0;
@@ -53,8 +53,8 @@ int UnitTest_ReconstructSecret() {
 
         if (!isSuccess) throw SecretDoesNotMatchException();
     } 
-    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
     catch(...) { return 1; }
     
     return 0;
