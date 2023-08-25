@@ -21,7 +21,10 @@ using namespace std;
 int UnitTest_ClassCreation() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
-    } catch(...) { return 1; }
+    } 
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(...) { return 1; }
 
     return 0;
 }
@@ -30,7 +33,10 @@ int UnitTest_MakeSecretShares(){
     try { 
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
         handler.makeSecretShares();
-    } catch (...) { return 1; }
+    }  
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(...) { return 1; }
 
     return 0;
 }
@@ -45,8 +51,11 @@ int UnitTest_ReconstructSecret() {
 
         bool isSuccess = handler.secretReconstruct(handlerShares);
 
-        if (!isSuccess) throw "Secret Failed to reconstruct";
-    } catch (...) { return 1; }
+        if (!isSuccess) throw SecretDoesNotMatchException();
+    } 
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(...) { return 1; }
     
     return 0;
 }

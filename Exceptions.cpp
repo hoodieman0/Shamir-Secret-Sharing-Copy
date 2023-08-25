@@ -13,3 +13,9 @@ print(ostream& out) const {
     out << "Keys Required: " << min << endl;
     return out;
 }
+
+ostream& SecretDoesNotMatchException::
+print(ostream& out) const {
+    out << title << code << " - " << detail << endl;
+    return out;
+}

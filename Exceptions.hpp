@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// look into stringstreams for use in std::exception::what()
 class GeneralException : public exception {
     protected:
         string title = "General Exception";
@@ -13,7 +14,7 @@ class GeneralException : public exception {
         int code = 100;
 
     public:
-        GeneralException();
+        GeneralException()=default;
         GeneralException(string detail) : detail(detail) {}
         virtual ostream& print(ostream& out) const;
 };
@@ -36,6 +37,16 @@ class InsufficientKeysException : public GeneralException {
         virtual ostream& print(ostream& out) const;
 };
 
+class SecretDoesNotMatchException : public GeneralException {
+    protected:
+        string title = "Calculated Secret Does Not Match Exception";
+        string detail = "ShamirSecret.secretReconstruct() failed to calculate the original secret";
+        int code = 102;
+
+    public:
+        SecretDoesNotMatchException()=default;
+        virtual ostream& print(ostream& out) const;
+};
 
 
 
