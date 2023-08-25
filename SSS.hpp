@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "MathNotation.hpp"
+#include "Exceptions.hpp"
 
 using namespace std;
 

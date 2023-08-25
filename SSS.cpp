@@ -37,14 +37,18 @@ makeSecretShares() {
     }
 }
 
+
 bool ShamirSecret::
 secretReconstruct(const vector<Coordinate2D> shareID) const {
     vector<Fraction> piFracs;
 
-    Fraction fracProduct (1, 1);
-    Fraction sum (0, 1);
+    Fraction fracProduct (1, 1); // 1 / 1
+    Fraction sum (0, 1); // 0 / 1
 
     int reconstruction;
+
+    if (shareID.size() < minShares) throw InsufficientKeysException(shareID.size(), minShares);
+    
 
     // https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing#Computationally_efficient_approach
     // this page does not explain how it simplifies the equation, but it is still used here
