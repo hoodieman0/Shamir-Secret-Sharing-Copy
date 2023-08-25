@@ -60,6 +60,24 @@ int UnitTest_ReconstructSecret() {
     return 0;
 }
 
+int UnitTest_ReconstructWithTooFewKeys() {
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        handler.makeSecretShares();
+        vector<Coordinate2D> handlerShares = handler.getShares();
+        
+        // remove all but one share
+        for (int i = 0; i < MAXSHARES - 1; i++) handlerShares.pop_back();
+        
+        handler.secretReconstruct(handlerShares);
+    }
+    catch(GeneralException& e) { cout << e << endl; return 0; }
+    catch(exception& e) { cout << e.what() << endl; return 0; }
+    catch(...) { return 1; }
+
+    return 1;
+}
+
 int UnitTest_RunAll(){
     int passed = 0;
     int failed = 0;
@@ -82,6 +100,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - ReconstructSecret..." << endl;
     if (UnitTest_ReconstructSecret()) { cout << "Unit Test - ReconstructSecret -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - ReconstructSecret -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - ReconstructWithTooFewKeys..." << endl;
+    if (UnitTest_ReconstructWithTooFewKeys()) { cout << "Unit Test - ReconstructWithTooFewKeys -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - ReconstructWithTooFewKeys -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
