@@ -27,7 +27,7 @@ inline ostream& operator<<(ostream& out, const GeneralException& e) {
 class InsufficientKeysException : public GeneralException {
     protected:
         string title = "Insufficient Keys Exception";
-        string detail = "An incorrect amount of keys was inputted";
+        string detail = "An incorrect amount of keys was inputted to satisfy reconstruction";
         int code = 101;
         int input, min = 0;
 
