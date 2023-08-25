@@ -1,3 +1,11 @@
+/**
+ * @file UnitTests.hpp
+ * @author James Mok (jmok780@gmail.com)
+ * @brief A file to hold all unit tests
+ * @version 1.0.0
+ * @date 2023-08-24
+ */
+
 #ifndef UTEST_HPP
 #define UTEST_HPP
 
@@ -18,6 +26,11 @@ using namespace std;
 \u2bd1 is a question mark
 */
 
+/**
+ * @brief check if the ShamirSecret class constructs properly
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
 int UnitTest_ClassCreation() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
@@ -29,6 +42,11 @@ int UnitTest_ClassCreation() {
     return 0;
 }
 
+/**
+ * @brief using the ShamirSecret class, test if makeSecretShares() runs without error
+ * 
+ * @return int 0 on pass, 1 on fail
+ */
 int UnitTest_MakeSecretShares(){
     try { 
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
@@ -41,6 +59,11 @@ int UnitTest_MakeSecretShares(){
     return 0;
 }
 
+/**
+ * @brief using the ShamirSecret class, test if secretReconstruct() succeeds
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
 int UnitTest_ReconstructSecret() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
@@ -60,6 +83,12 @@ int UnitTest_ReconstructSecret() {
     return 0;
 }
 
+/**
+ * @brief using the ShamirSecret class, call secretReconstruct() with less than MINSHARES keys
+ * @details if an exception is thrown, the test passes
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
 int UnitTest_ReconstructWithTooFewKeys() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
@@ -78,6 +107,11 @@ int UnitTest_ReconstructWithTooFewKeys() {
     return 1;
 }
 
+/**
+ * @brief run all possible unit tests
+ * 
+ * @return int 0 on finish 
+ */
 int UnitTest_RunAll(){
     int passed = 0;
     int failed = 0;

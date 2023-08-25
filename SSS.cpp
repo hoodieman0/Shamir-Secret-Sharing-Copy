@@ -1,3 +1,11 @@
+/**
+ * @file SSS.cpp
+ * @author James Mok (jmok780@gmail.com)
+ * @brief Implementations of the ShamirSecret class
+ * @version 1.0.0
+ * @date 2023-08-24
+ */
+
 #include "SSS.hpp"
 
 int ShamirSecret::

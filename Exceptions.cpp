@@ -1,3 +1,11 @@
+/**
+ * @file Exceptions.cpp
+ * @author James Mok (jmok780@gmail.com)
+ * @brief Implementations of errors
+ * @version 1.0.0
+ * @date 2023-08-24
+ */
+
 #include "Exceptions.hpp"
 
 ostream& GeneralException::
