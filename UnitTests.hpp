@@ -52,6 +52,8 @@ int UnitTest_MakeSecretShares(){
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
         vector<Coordinate2D> shares = handler.makeSecretShares();
 
+        if (shares.empty()) throw EmptyShareSetException();
+
         cout << "Generated Shares: " << endl;
         for (Coordinate2D s : shares) {
             cout << s << endl;
