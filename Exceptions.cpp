@@ -27,3 +27,15 @@ print(ostream& out) const {
     out << title << " Code: " << code << " - " << detail;
     return out;
 }
+
+ostream& GenerateTwoShareSetsException::
+print(ostream& out) const {
+    out << title << " Code: " << code << " - " << detail;
+    return out;
+}
+
+ostream& EmptyShareSetException::
+print(ostream& out) const {
+    out << title << " Code: " << code << " - " << detail;
+    return out;
+}
