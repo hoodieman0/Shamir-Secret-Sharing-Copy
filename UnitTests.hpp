@@ -65,6 +65,29 @@ int UnitTest_MakeSecretShares(){
 }
 
 /**
+ * @brief using the ShamirSecret class, test if makeSecretShares only returns values on first run
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
+int UnitTest_GenerateSharesTwice() {
+        try { 
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        // first call
+        vector<Coordinate2D> shares = handler.makeSecretShares();
+        if (shares.empty()) throw EmptyShareSetException();
+
+        // second call
+        shares = handler.makeSecretShares();
+        if (!shares.empty()) throw GenerateTwoShareSetsException();
+    }  
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(...) { return 1; }
+
+    return 0;
+}
+
+/**
  * @brief using the ShamirSecret class, test if secretReconstruct() succeeds
  * 
  * @return int 0 on pass, 1 on fail 
@@ -129,6 +152,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - MakeSecretShares..." << endl;
     if (UnitTest_MakeSecretShares()) { cout << "Unit Test - MakeSecretShares -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - MakeSecretShares -> Passed Test \u2713" << endl; passed++; }
+
+     cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - GenerateSharesTwice()..." << endl;
+    if (UnitTest_GenerateSharesTwice()) { cout << "Unit Test - GenerateSharesTwice -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - GenerateSharesTwice -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
 
