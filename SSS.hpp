@@ -28,9 +28,6 @@ class ShamirSecret {
         // starts with degree 0, ends with degree minShares
         vector<int> polyCoefficients; // TODO shoud this be stored in the class or function?
 
-        // x is the id, y is the share
-        vector<Coordinate2D> shares; // TODO should this be saved for privacy reasons? Or should each be stored by the user?
-
         vector<Coordinate2D> inputtedShares;
 
         /// @brief solves the polynomial using the polyCoefficients vector
@@ -46,7 +43,7 @@ class ShamirSecret {
         ShamirSecret(int secret, int min, int max) : secret(secret), minShares(min), maxShares(max) {} ;
         
         /// @brief fills the polyCoefficients vector and shares vector with their needed values 
-        void makeSecretShares();
+        vector<Coordinate2D> makeSecretShares();
 
         /// @brief takes the inputted keys and attempts to reconstruct the secret
         /// @param shareID a vector of Coordinate2Ds that represent the id (x) and the given key (y)
@@ -57,9 +54,6 @@ class ShamirSecret {
         /// @param id a Coordinate2D of a share made from makeSecretShares
         /// @return int -1 on incomplete number of shares or return secretReconstruct()
         int inputShare(const Coordinate2D id);
-
-        /// @return Coordinate2D vector where the id is x and the given key is y
-        vector<Coordinate2D> getShares() const { return shares; } // TODO remove for security
 };
 
 #endif SSS_HPP

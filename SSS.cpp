@@ -25,8 +25,10 @@ solvePolynomialAtX(int x) {
     return result;
 }
 
-void ShamirSecret::
+vector<Coordinate2D> ShamirSecret::
 makeSecretShares() {
+    vector<Coordinate2D> shares;
+
     random_device dev;
     mt19937 rng(dev());
     uniform_int_distribution<mt19937::result_type> dist100(1,100);
@@ -43,6 +45,8 @@ makeSecretShares() {
     for (int x = 1; x <= maxShares; x++) {
         shares.push_back(Coordinate2D (x, solvePolynomialAtX(x)));
     }
+
+    return shares;
 }
 
 
