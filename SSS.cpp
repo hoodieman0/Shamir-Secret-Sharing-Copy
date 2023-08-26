@@ -46,7 +46,7 @@ makeSecretShares() {
 }
 
 
-bool ShamirSecret::
+int ShamirSecret::
 secretReconstruct(const vector<Coordinate2D> shareID) const {
     vector<Fraction> piFracs;
 
@@ -85,8 +85,8 @@ secretReconstruct(const vector<Coordinate2D> shareID) const {
     
     reconstruction = sum.getNumerator() / sum.getDenominator();
 
-    if (reconstruction == secret) return true;
-    return false;
+    if (reconstruction == secret) return reconstruction;
+    return -1;
 }
 
 void ShamirSecret::

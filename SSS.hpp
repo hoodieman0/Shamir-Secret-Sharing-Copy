@@ -50,8 +50,8 @@ class ShamirSecret {
 
         /// @brief takes the inputted keys and attempts to reconstruct the secret
         /// @param shareID a vector of Coordinate2Ds that represent the id (x) and the given key (y)
-        /// @return bool true on successful reconstruction, false if unsuccessful
-        bool secretReconstruct(const vector<Coordinate2D> shareID) const;
+        /// @return int return reconstruction of secret on success, return -1 on fail
+        int secretReconstruct(const vector<Coordinate2D> shareID) const;
 
         /// @brief allows the class to wait for minShares inputs before running secretReconstruct (is not validated)
         /// @param id a Coordinate2D of a share made from makeSecretShares
