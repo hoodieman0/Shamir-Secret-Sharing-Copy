@@ -50,7 +50,12 @@ int UnitTest_ClassCreation() {
 int UnitTest_MakeSecretShares(){
     try { 
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
-        handler.makeSecretShares();
+        vector<Coordinate2D> shares = handler.makeSecretShares();
+
+        cout << "Generated Shares: " << endl;
+        for (Coordinate2D s : shares) {
+            cout << s << endl;
+        }
     }  
     catch(GeneralException& e) { cout << e << endl; return 1; }
     catch(exception& e) { cout << e.what() << endl; return 1; }
@@ -67,14 +72,11 @@ int UnitTest_MakeSecretShares(){
 int UnitTest_ReconstructSecret() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
-        handler.makeSecretShares();
+        vector<Coordinate2D> shares = handler.makeSecretShares();
 
-        vector<Coordinate2D> handlerShares = handler.getShares();
+        int reconstruction = handler.secretReconstruct(shares);
 
-
-        bool isSuccess = handler.secretReconstruct(handlerShares);
-
-        if (!isSuccess) throw SecretDoesNotMatchException();
+        if (reconstruction != SECRET) throw SecretDoesNotMatchException();
     } 
     catch(GeneralException& e) { cout << e << endl; return 1; }
     catch(exception& e) { cout << e.what() << endl; return 1; }
@@ -92,13 +94,12 @@ int UnitTest_ReconstructSecret() {
 int UnitTest_ReconstructWithTooFewKeys() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
-        handler.makeSecretShares();
-        vector<Coordinate2D> handlerShares = handler.getShares();
+        vector<Coordinate2D> shares = handler.makeSecretShares();
         
         // remove all but one share
-        for (int i = 0; i < MAXSHARES - 1; i++) handlerShares.pop_back();
+        for (int i = 0; i < MAXSHARES - 1; i++) shares.pop_back();
         
-        handler.secretReconstruct(handlerShares);
+        handler.secretReconstruct(shares);
     }
     catch(GeneralException& e) { cout << e << endl; return 0; }
     catch(exception& e) { cout << e.what() << endl; return 0; }
