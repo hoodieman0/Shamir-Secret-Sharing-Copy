@@ -47,6 +47,7 @@ class ShamirSecret {
         /// @brief fills the polyCoefficients vector and shares vector with their needed values 
 
         /// @brief creates the secret shares to be used in secretReconstruct(), can be run only once
+        /// @details the caller must ensure that these secret shares are secure, as they cannot be regenerated
         /// @return a vector of Coordiante2Ds, where x is the id and y is the random polynomial at x. Returns empty vector if already run before
         vector<Coordinate2D> makeSecretShares();
 
