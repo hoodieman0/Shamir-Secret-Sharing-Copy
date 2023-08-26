@@ -40,7 +40,7 @@ class ShamirSecret {
 
     public:
         /// @brief constructor for ShamirSecret
-        /// @param secret the desired int to be hidden 
+        /// @param secret the desired int to be hidden, must be positive 
         /// @param min minimum number of keys to decode secret
         /// @param max maxmimum number of keys to generate
         ShamirSecret(int secret, int min, int max) : secret(secret), minShares(min), maxShares(max) {} ;
