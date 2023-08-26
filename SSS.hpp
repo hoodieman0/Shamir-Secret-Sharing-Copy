@@ -25,6 +25,8 @@ class ShamirSecret {
         int minShares;
         int maxShares;
 
+        bool hasShares = false;
+
         // starts with degree 0, ends with degree minShares
         vector<int> polyCoefficients; // TODO shoud this be stored in the class or function?
 
@@ -43,6 +45,9 @@ class ShamirSecret {
         ShamirSecret(int secret, int min, int max) : secret(secret), minShares(min), maxShares(max) {} ;
         
         /// @brief fills the polyCoefficients vector and shares vector with their needed values 
+
+        /// @brief creates the secret shares to be used in secretReconstruct(), can be run only once
+        /// @return a vector of Coordiante2Ds, where x is the id and y is the random polynomial at x. Returns empty vector if already run before
         vector<Coordinate2D> makeSecretShares();
 
         /// @brief takes the inputted keys and attempts to reconstruct the secret
