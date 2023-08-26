@@ -56,6 +56,16 @@ class SecretDoesNotMatchException : public GeneralException {
         virtual ostream& print(ostream& out) const;
 };
 
+class GenerateTwoShareSetsException : public GeneralException {
+    protected:
+        string title = "Generated Two Sets of Shares";
+        string detail = "ShamirSecret.makeSecretShares() was run more than once";
+        int code = 103;
+
+    public:
+        GenerateTwoShareSetsException()=default;
+        virtual ostream& print(ostream& out) const;
+};
 
 
 #endif EXCEPT_HPP
