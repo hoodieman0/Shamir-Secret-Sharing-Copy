@@ -88,3 +88,13 @@ secretReconstruct(const vector<Coordinate2D> shareID) const {
     if (reconstruction == secret) return true;
     return false;
 }
+
+void ShamirSecret::
+inputShare(const Coordinate2D id) {
+    inputtedShares.push_back(id);
+
+    if (inputtedShares.size() >= minShares) {
+        secretReconstruct(inputtedShares);
+        inputtedShares.clear();
+    }
+}
