@@ -67,5 +67,16 @@ class GenerateTwoShareSetsException : public GeneralException {
         virtual ostream& print(ostream& out) const;
 };
 
+class EmptyShareSetException : public GenerateTwoShareSetsException {
+    protected:
+        string title = "Generated Shares Set Returns Empty";
+        string detail = "ShamirSecret.makeSecretShares() has returned an empty vector when it should be filled";
+        int code = 104;
+
+    public:
+        EmptyShareSetException()=default;
+        virtual ostream& print(ostream& out) const;
+};
+
 
 #endif EXCEPT_HPP
