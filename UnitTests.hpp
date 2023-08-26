@@ -133,6 +133,8 @@ int UnitTest_ReconstructWithTooFewKeys() {
     return 1;
 }
 
+// TODO inputShare test
+
 /**
  * @brief run all possible unit tests
  * 
@@ -143,6 +145,9 @@ int UnitTest_RunAll(){
     int failed = 0;
 
     cout << "Running all unit tests for Shamir Secret Sharing class" << endl;
+    cout << "Testing Secret: " << SECRET << endl;
+    cout << "Minimum Amount of Shares To Unlock: " << MINSHARES << endl;
+    cout << "Maximum Amount of Shares to Generate: " << MAXSHARES << endl;
     cout << "------------------------------------------------------" << endl;
     
     cout << "Running Unit Test - ClassCreation..." << endl;
@@ -157,7 +162,7 @@ int UnitTest_RunAll(){
 
      cout << "------------------------------------------------------" << endl;
 
-    cout << "Running Unit Test - GenerateSharesTwice()..." << endl;
+    cout << "Running Unit Test - GenerateSharesTwice..." << endl;
     if (UnitTest_GenerateSharesTwice()) { cout << "Unit Test - GenerateSharesTwice -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - GenerateSharesTwice -> Passed Test \u2713" << endl; passed++; }
 
