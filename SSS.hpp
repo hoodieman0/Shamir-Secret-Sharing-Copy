@@ -55,7 +55,8 @@ class ShamirSecret {
 
         /// @brief allows the class to wait for minShares inputs before running secretReconstruct (is not validated)
         /// @param id a Coordinate2D of a share made from makeSecretShares
-        void inputShare(const Coordinate2D id);
+        /// @return int -1 on incomplete number of shares or return secretReconstruct()
+        int inputShare(const Coordinate2D id);
 
         /// @return Coordinate2D vector where the id is x and the given key is y
         vector<Coordinate2D> getShares() const { return shares; } // TODO remove for security

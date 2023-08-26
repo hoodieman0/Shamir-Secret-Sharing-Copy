@@ -89,12 +89,15 @@ secretReconstruct(const vector<Coordinate2D> shareID) const {
     return -1;
 }
 
-void ShamirSecret::
+int ShamirSecret::
 inputShare(const Coordinate2D id) {
     inputtedShares.push_back(id);
 
     if (inputtedShares.size() >= minShares) {
-        secretReconstruct(inputtedShares);
+        int result = secretReconstruct(inputtedShares);
         inputtedShares.clear();
+        return result;
     }
+
+    return -1;
 }
