@@ -133,8 +133,43 @@ int UnitTest_ReconstructWithTooFewKeys() {
     return 1;
 }
 
-// TODO inputShare test
+/**
+ * @brief using the ShamirSecret class, call inputShare() and deteremine if it takes minShare keys to get the secret
+ * 
+ * @return int 0 on pass, 1 on fail  
+ */
+int UnitTest_InputShares() {
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        vector<Coordinate2D> shares = handler.makeSecretShares();
 
+        random_device dev;
+        mt19937 rng(dev());
+        uniform_int_distribution<mt19937::result_type> distMAX(0, shares.size());
+
+        // remove enough elements to meet the minumum
+        for (int i = 0; i < (MAXSHARES - MINSHARES); i++){
+            shares.erase(shares.begin()+(distMAX(rng) % shares.size()));
+        }
+
+        int result;
+        for (int i = 0; i < MINSHARES; i++){
+            result = handler.inputShare(shares[i]);
+            cout << "Result of pass " << i+1 << ": " << result << endl;
+        }
+
+        if (result != SECRET) throw SecretDoesNotMatchException();
+    }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(...) { return 1; }
+    
+    return 0;
+}
+
+// same inputs should be bad test
+
+// function for pass and fail text for brevity
 /**
  * @brief run all possible unit tests
  * 
@@ -177,6 +212,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - ReconstructWithTooFewKeys..." << endl;
     if (UnitTest_ReconstructWithTooFewKeys()) { cout << "Unit Test - ReconstructWithTooFewKeys -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - ReconstructWithTooFewKeys -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - InputShares..." << endl;
+    if (UnitTest_InputShares()) { cout << "Unit Test - InputShares -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - InputShares -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
