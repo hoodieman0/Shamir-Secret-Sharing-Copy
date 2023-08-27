@@ -1,4 +1,3 @@
-<a name="page-top"></a>
 # Shamir-Secret-Sharing-Copy
 ![License](https://img.shields.io/github/license/hoodieman0/Shamir-Secret-Sharing-Copy?style=plastic) 
 ![Issues](https://img.shields.io/github/issues/hoodieman0/Shamir-Secret-Sharing-Copy?style=plastic)
@@ -27,5 +26,3 @@ MathNotation.hpp contains the representations used to simplify ShamirSecret func
 
 # Author
 * [James Mok (Github)](https://github.com/hoodieman0)
-
-<a href="#page-top"><p style="text-align: center;">[Back to Top]</p></a>
