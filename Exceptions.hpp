@@ -95,10 +95,11 @@ class UnexpectedResultException : public GeneralException {
         string title = "The Returned Result Is Not Expected";
         string detail = "The resulting value was different than the expected value";
         int code = 105;
-        int expected, result;
+        int expected, result = 0;
 
     public:
         UnexpectedResultException()=default;
+        UnexpectedResultException(int expected, int result) : expected(expected), result(result) {}
         virtual ostream& print(ostream& out) const;
 };
 
