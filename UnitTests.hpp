@@ -34,6 +34,7 @@ using namespace std;
 int UnitTest_ClassCreation() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        cout << "The ShamirSecret class was created" << endl;
     } 
     catch(GeneralException& e) { cout << e << endl; return 1; }
     catch(exception& e) { cout << e.what() << endl; return 1; }
@@ -80,6 +81,8 @@ int UnitTest_GenerateSharesTwice() {
 
         // second call
         shares = handler.makeSecretShares();
+
+        cout << "The size of shares is: " << shares.size() << endl;
         if (!shares.empty()) throw GenerateTwoShareSetsException();
     }  
     catch(GeneralException& e) { cout << e << endl; return 1; }
@@ -100,6 +103,8 @@ int UnitTest_ReconstructSecret() {
         vector<Coordinate2D> shares = handler.makeSecretShares();
 
         int reconstruction = handler.secretReconstruct(shares);
+
+        cout << "The final reconstruction is: " << reconstruction << endl;
 
         if (reconstruction != SECRET) throw SecretDoesNotMatchException();
     } 
@@ -124,7 +129,8 @@ int UnitTest_ReconstructWithTooFewKeys() {
         // remove all but one share
         for (int i = 0; i < MAXSHARES - 1; i++) shares.pop_back();
         
-        handler.secretReconstruct(shares);
+        int result = handler.secretReconstruct(shares);
+        cout << "The final reconstruction is: " << result << endl;
     }
     catch(GeneralException& e) { cout << e << endl; return 0; }
     catch(exception& e) { cout << e.what() << endl; return 0; }
