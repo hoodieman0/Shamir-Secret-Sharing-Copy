@@ -224,7 +224,6 @@ int UnitTest_SameInputs(){
     return 0;
 }
 
-// function for pass and fail text for brevity
 /**
  * @brief run all possible unit tests
  * 
