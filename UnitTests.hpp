@@ -189,7 +189,29 @@ int UnitTest_BadInputs(){
     return 0;
 }
 
-// same inputs should be bad test
+/**
+ * @brief  using the ShamirSecret class, test if the secret is not given if the same input is given 
+ * 
+ * @return int 0 on pass, 1 on fail   
+ */
+int UnitTest_SameInputs(){
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        vector<Coordinate2D> shares = handler.makeSecretShares();
+            
+        int result;
+        for (int i = 0; i < MINSHARES; i++){
+            result = handler.inputShare(shares[0]);
+            cout << "Result of pass " << i+1 << ": " << result << endl;
+        }
+        if (result != -1) throw UnexpectedResultException(-1, result);
+    }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(...) { return 1; }
+
+    return 0;
+}
 
 // function for pass and fail text for brevity
 /**
@@ -246,6 +268,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - BadInputs..." << endl;
     if (UnitTest_BadInputs()) { cout << "Unit Test - BadInputs -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - BadInputs -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - SameInputs..." << endl;
+    if (UnitTest_SameInputs()) { cout << "Unit Test - SameInputs -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - SameInputs -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
