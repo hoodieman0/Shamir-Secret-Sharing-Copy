@@ -168,6 +168,11 @@ int UnitTest_InputShares() {
 }
 
 // could be more exhaustive
+/**
+ * @brief using the ShamirSecret class, test if the secret is not given if there are wrong inputs 
+ * 
+ * @return int 0 on pass, 1 on fail  
+ */
 int UnitTest_BadInputs(){
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
