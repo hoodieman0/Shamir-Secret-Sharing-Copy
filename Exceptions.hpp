@@ -14,6 +14,17 @@
 
 using namespace std;
 
+/*
+* List of Exceptions
+* --------------------
+* GeneralException
+* InsufficientKeysException
+* SecretDoesNotMatchException
+* GenerateTwoShareSetsException
+* EmptyShareSetException
+* UnexpectedResultException
+*/
+
 // look into stringstreams for use in std::exception::what()
 class GeneralException : public exception {
     protected:
@@ -75,6 +86,19 @@ class EmptyShareSetException : public GenerateTwoShareSetsException {
 
     public:
         EmptyShareSetException()=default;
+        virtual ostream& print(ostream& out) const;
+};
+
+// should be made a template for any type
+class UnexpectedResultException : public GeneralException {
+    protected:
+        string title = "The Returned Result Is Not Expected";
+        string detail = "The resulting value was different than the expected value";
+        int code = 105;
+        int expected, result;
+
+    public:
+        UnexpectedResultException()=default;
         virtual ostream& print(ostream& out) const;
 };
 

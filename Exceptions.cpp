@@ -39,3 +39,11 @@ print(ostream& out) const {
     out << title << " Code: " << code << " - " << detail;
     return out;
 }
+
+ostream& UnexpectedResultException::
+print(ostream& out) const {
+    out << title << " Code: " << code << " - " << detail << endl;
+    out << "Received Value: " << result << endl;
+    out << "Expected Value: " << expected;
+    return out;
+}
