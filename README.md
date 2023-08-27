@@ -28,4 +28,4 @@ MathNotation.hpp contains the representations used to simplify ShamirSecret func
 # Author
 * [James Mok (Github)](https://github.com/hoodieman0)
 
-<a href="page-top"><p style="text-align: center;">[Back to Top]</p></a>
+<a href="#page-top"><p style="text-align: center;">[Back to Top]</p></a>
