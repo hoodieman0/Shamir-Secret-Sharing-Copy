@@ -167,6 +167,28 @@ int UnitTest_InputShares() {
     return 0;
 }
 
+// could be more exhaustive
+int UnitTest_BadInputs(){
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        vector<Coordinate2D> shares = handler.makeSecretShares();
+        
+        vector<Coordinate2D> badShares;
+        for (int i = 0; i < MINSHARES; i++){
+            badShares.push_back(Coordinate2D(i, i)); // assuming that (1,1), (2,2), ... are not valid
+        }
+        
+        int result = handler.secretReconstruct(badShares);
+        cout << "The final reconstruction is: " << result << endl;
+        if (result != -1) throw UnexpectedResultException(-1, result);
+    }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(...) { return 1; }
+
+    return 0;
+}
+
 // same inputs should be bad test
 
 // function for pass and fail text for brevity
@@ -218,6 +240,12 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - InputShares..." << endl;
     if (UnitTest_InputShares()) { cout << "Unit Test - InputShares -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - InputShares -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - BadInputs..." << endl;
+    if (UnitTest_BadInputs()) { cout << "Unit Test - BadInputs -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - BadInputs -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
     cout << "Finished running all tests" << endl;
