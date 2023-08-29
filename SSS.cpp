@@ -53,6 +53,34 @@ makeSecretShares() {
     return shares;
 }
 
+int ShamirSecret::
+modularInverse(int number, int modulo){
+    int result = 0;
+    int remainder = modulo;
+    int newResult = 1;
+    int newRemainder = number;
+
+    int swap;
+
+    int quotient;
+    while (newRemainder != 0) {
+        quotient = remainder / newRemainder;
+        
+        swap = newResult;
+        newResult = result - quotient * newResult;
+        result = swap;
+
+        swap = newRemainder;
+        newRemainder = remainder - quotient * newRemainder;
+        remainder = swap;
+    }
+
+    if ( remainder > 1) { cout << "number is not inveritable" << endl;}
+    if (result < 0) result = result + modulo;
+
+    return result;
+}
+
 
 int ShamirSecret::
 secretReconstruct(const vector<Coordinate2D> shareID) const {

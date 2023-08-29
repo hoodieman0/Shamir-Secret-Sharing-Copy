@@ -36,6 +36,7 @@ class ShamirSecret {
         /// @param x the number used to evaluate the polynomial
         /// @return int the given y value for the polynomial evaluated at x
         int solvePolynomialAtX(int x);
+        int modularInverse(int number, int modulo);
 
     public:
         /// @brief constructor for ShamirSecret
