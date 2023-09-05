@@ -35,8 +35,8 @@ class ShamirSecret {
         /// @brief solves the polynomial using the polyCoefficients vector
         /// @param x the number used to evaluate the polynomial
         /// @return int the given y value for the polynomial evaluated at x
-        int solvePolynomialAtX(int x);
-        int modularInverse(int number, int modulo);
+        int solvePolynomialAtX(const int x) const;
+        int modularInverse(const int number, const int modulo) const;
 
     public:
         /// @brief constructor for ShamirSecret

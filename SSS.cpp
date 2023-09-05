@@ -9,7 +9,7 @@
 #include "SSS.hpp"
 
 int ShamirSecret::
-solvePolynomialAtX(int x) {
+solvePolynomialAtX(const int x) const {
     int result = 0;
     int exponent = 0;
     int var = 0;
@@ -54,29 +54,32 @@ makeSecretShares() {
 }
 
 int ShamirSecret::
-modularInverse(int number, int modulo){
+modularInverse(const int number, const int modulo) const{
     int result = 0;
     int remainder = modulo;
     int newResult = 1;
-    int newRemainder = number;
+    int newRemainder = abs(number); // negative numbers are congruent to their positive
 
     int swap;
 
     int quotient;
-    while (newRemainder != 0) {
-        quotient = remainder / newRemainder;
-        
-        swap = newResult;
-        newResult = result - quotient * newResult;
-        result = swap;
+    while (newRemainder > 1) {
+        quotient = newRemainder / remainder;
 
-        swap = newRemainder;
-        newRemainder = remainder - quotient * newRemainder;
-        remainder = swap;
+        swap = remainder;
+        remainder = newRemainder % remainder;
+        newRemainder = swap;
+
+        swap = result;
+        result = newResult - quotient * result;
+        newResult = swap;
     }
 
-    if ( remainder > 1) { cout << "number is not inveritable" << endl;}
-    if (result < 0) result = result + modulo;
+    if ( newRemainder > 1) { cout << "number is not inveritable" << endl;}
+    if (newResult < 0) newResult += modulo;
+
+    return newResult;
+}
 
     return result;
 }
