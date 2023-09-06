@@ -81,21 +81,17 @@ modularInverse(const int number, const int modulo) const{
     return newResult;
 }
 
-    return result;
-}
-
-
 int ShamirSecret::
 secretReconstruct(const vector<Coordinate2D> shareID) const {
+
+    if (shareID.size() < minShares) throw InsufficientKeysException(shareID.size(), minShares);
+
     vector<Fraction> piFracs;
 
     Fraction fracProduct (1, 1); // 1 / 1
     Fraction sum (0, 1); // 0 / 1
 
     int reconstruction;
-
-    if (shareID.size() < minShares) throw InsufficientKeysException(shareID.size(), minShares);
-    
 
     // https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing#Computationally_efficient_approach
     // this page does not explain how it simplifies the equation, but it is still used here
@@ -121,9 +117,9 @@ secretReconstruct(const vector<Coordinate2D> shareID) const {
         piFracs.clear();
         fracProduct = Fraction(1, 1);
     }
-    
-    reconstruction = sum.getNumerator() / sum.getDenominator();
 
+    reconstruction = ((sum.getNumerator() * modularInverse(sum.getDenominator(), prime)) + prime) % prime;
+    
     if (reconstruction == secret) return reconstruction;
     return -1;
 }

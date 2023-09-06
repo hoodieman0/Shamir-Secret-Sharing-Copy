@@ -25,6 +25,8 @@ class ShamirSecret {
         int minShares;
         int maxShares;
 
+        int prime = 1613;
+
         bool hasShares = false;
 
         // starts with degree 0, ends with degree minShares
