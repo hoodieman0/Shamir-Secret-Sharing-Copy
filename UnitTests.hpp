@@ -115,6 +115,11 @@ int UnitTest_ReconstructSecret() {
     return 0;
 }
 
+/**
+ * @brief using the ShamirSecret class, test if secretReconstruct() succeeds 10,000 times with random valid shares
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
 int UnitTest_ReconstructSeveral(){
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);

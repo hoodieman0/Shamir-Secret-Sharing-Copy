@@ -37,6 +37,10 @@ class ShamirSecret {
         /// @param x the number used to evaluate the polynomial
         /// @return int the given y value for the polynomial evaluated at x
         int solvePolynomialAtX(const int x) const;
+
+        /// @brief cacluates the modular inverse of a number
+        /// @param number the number to find the inverse of
+        /// @param modulo the modulo factor to use for the inverse
         int modularInverse(const int number, const int modulo) const;
 
     public:
