@@ -124,6 +124,8 @@ int UnitTest_ReconstructSeveral(){
         random_device dev;
         mt19937 rng(dev());
         uniform_int_distribution<mt19937::result_type> distMAX(0, shares.size());
+        
+        cout << "Running ShamirSecret.reconstructShares() 10,000 times..." << endl;
 
         for(int j = 0; j < 10000; j++) {
             // remove enough elements to meet the minumum
