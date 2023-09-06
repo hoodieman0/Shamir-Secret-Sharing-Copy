@@ -17,13 +17,14 @@ using namespace std;
 /*
 * List of Exceptions
 * --------------------
-* GeneralException
-* InsufficientKeysException
-* SecretDoesNotMatchException
-* GenerateTwoShareSetsException
-* EmptyShareSetException
-* UnexpectedResultException
+* General
+* InsufficientKeys
+* SecretDoesNotMatch
+* GenerateTwoShareSets
+* EmptyShareSet
+* UnexpectedResult
 * IncalculableSecret
+* InvalidParameter
 */
 
 // look into stringstreams for use in std::exception::what()
@@ -104,14 +105,25 @@ class UnexpectedResultException : public GeneralException {
         virtual ostream& print(ostream& out) const;
 };
 
-class IncalculableSecret : public GeneralException {
+class IncalculableSecretException : public GeneralException {
     protected:
         string title = "ShamirSecret Cannot Calculate Secret";
         string detail = "class cannot be constructed with a secret greater than its finite field (prime)";
         int code = 106;
 
     public:
-        IncalculableSecret()=default;
+        IncalculableSecretException()=default;
+        virtual ostream& print(ostream& out) const;
+};
+
+class InvalidParameterException : public GeneralException {
+    protected:
+        string title = "ShamirSecret Has Invalid Parameters";
+        string detail = "class was given bad parameters";
+        int code = 106;
+
+    public:
+        InvalidParameterException()=default;
         virtual ostream& print(ostream& out) const;
 };
 

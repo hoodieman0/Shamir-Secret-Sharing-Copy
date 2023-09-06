@@ -48,7 +48,13 @@ print(ostream& out) const {
     return out;
 }
 
-ostream& IncalculableSecret::
+ostream& IncalculableSecretException::
+print(ostream& out) const {
+    out << title << " Code: " << code << " - " << detail;
+    return out;
+}
+
+ostream& InvalidParameterException::
 print(ostream& out) const {
     out << title << " Code: " << code << " - " << detail;
     return out;

@@ -50,7 +50,7 @@ class ShamirSecret {
         /// @param max maxmimum number of keys to generate
         /// @param prime finite field to use, default is 2^19 - 1 (7th Mersenne Prime)
         ShamirSecret(int secret, int min, int max, int prime=((int) pow(2, 19)) - 1) : secret(secret), minShares(min), maxShares(max), prime(prime) {
-            if (secret > prime) throw IncalculableSecret(); 
+            if (secret > prime) throw IncalculableSecretException();
         } 
         
         /// @brief fills the polyCoefficients vector and shares vector with their needed values 
