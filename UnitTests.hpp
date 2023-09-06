@@ -115,6 +115,37 @@ int UnitTest_ReconstructSecret() {
     return 0;
 }
 
+int UnitTest_ReconstructSeveral(){
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES);
+        vector<Coordinate2D> shares = handler.makeSecretShares();
+        vector<Coordinate2D> copy = shares;
+
+        random_device dev;
+        mt19937 rng(dev());
+        uniform_int_distribution<mt19937::result_type> distMAX(0, shares.size());
+
+        for(int j = 0; j < 10000; j++) {
+            // remove enough elements to meet the minumum
+            for (int i = 0; i < (MAXSHARES - MINSHARES); i++){
+                copy.erase(copy.begin()+(distMAX(rng) % copy.size()));
+            }
+
+            int result;
+            result = handler.secretReconstruct(copy);
+
+            if (result != SECRET) throw SecretDoesNotMatchException();
+
+            copy = shares;
+        }
+    }
+    catch(GeneralException& e) { cout << e << endl; return 1; }
+    catch(exception& e) { cout << e.what() << endl; return 1; }
+    catch(...) { return 1; }
+    
+    return 0;
+}
+
 /**
  * @brief using the ShamirSecret class, call secretReconstruct() with less than MINSHARES keys
  * @details if an exception is thrown, the test passes
@@ -262,6 +293,13 @@ int UnitTest_RunAll(){
     else { cout << "Unit Test - ReconstructSecret -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
+
+    cout << "Running Unit Test - ReconstructSeveral..." << endl;
+    if (UnitTest_ReconstructSeveral()) { cout << "Unit Test - ReconstructSeveral -> Failed Test \u274c" << endl; failed++; }
+    else { cout << "Unit Test - ReconstructSeveral -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+    
 
     cout << "Running Unit Test - ReconstructWithTooFewKeys..." << endl;
     if (UnitTest_ReconstructWithTooFewKeys()) { cout << "Unit Test - ReconstructWithTooFewKeys -> Failed Test \u274c" << endl; failed++; }
