@@ -41,6 +41,7 @@ class ShamirSecret {
         /// @brief cacluates the modular inverse of a number
         /// @param number the number to find the inverse of
         /// @param modulo the modulo factor to use for the inverse
+        /// @return int the modular inverse of number using modulo 
         int modularInverse(const int number, const int modulo) const;
 
     public:
@@ -54,7 +55,6 @@ class ShamirSecret {
             if (min < 1 || max < 1 || max < min) throw InvalidParameterException();
         } 
         
-        /// @brief fills the polyCoefficients vector and shares vector with their needed values 
 
         /// @brief creates the secret shares to be used in secretReconstruct(), can be run only once
         /// @details the caller must ensure that these secret shares are secure, as they cannot be regenerated
