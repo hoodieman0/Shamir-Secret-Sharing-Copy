@@ -17,7 +17,6 @@ MathNotation.hpp contains the representations used to simplify ShamirSecret func
 
 # Future Plans
 * Making the ShamirSecret class a template class
-* Ensuring the ShamirSecret uses a finite field with primes (not sufficiently secure eitherwise)
 
 # References
 * [Purdue University Lecture Shamir Secret Sharing Intro Pt. 1](https://www.cs.purdue.edu/homes/hmaji/teaching/Fall%202020/lectures/08.pdf)
