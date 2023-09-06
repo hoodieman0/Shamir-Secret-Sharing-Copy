@@ -9,7 +9,7 @@
 #include "SSS.hpp"
 
 int ShamirSecret::
-solvePolynomialAtX(const int x) const {
+solvePolynomialAtX(const int x, const vector<int> polyCoefficients) const {
     int result = 0;
     int exponent = 0;
     int var = 0;
@@ -31,6 +31,9 @@ makeSecretShares() {
 
     if (hasShares) return shares;
 
+    // starts with degree 0, ends with degree minShares
+    vector<int> polyCoefficients;
+
     random_device dev;
     mt19937 rng(dev());
     uniform_int_distribution<mt19937::result_type> dist100(1,100);
@@ -45,7 +48,7 @@ makeSecretShares() {
 
     // create the shares and put them in the variable
     for (int x = 1; x <= maxShares; x++) {
-        shares.push_back(Coordinate2D (x, solvePolynomialAtX(x)));
+        shares.push_back(Coordinate2D (x, solvePolynomialAtX(x, polyCoefficients)));
     }
 
     hasShares = true;

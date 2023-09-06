@@ -28,15 +28,13 @@ class ShamirSecret {
 
         bool hasShares = false;
 
-        // starts with degree 0, ends with degree minShares
-        vector<int> polyCoefficients; // TODO shoud this be stored in the class or function?
-
         vector<Coordinate2D> inputtedShares;
 
         /// @brief solves the polynomial using the polyCoefficients vector
         /// @param x the number used to evaluate the polynomial
+        /// @param polyCoefficients the vector containing the polynomial coefficients from least to greatest degree (ex: 5 + 7x + 10x^2)
         /// @return int the given y value for the polynomial evaluated at x
-        int solvePolynomialAtX(const int x) const;
+        int solvePolynomialAtX(const int x, const vector<int> polyCoefficients) const;
 
         /// @brief cacluates the modular inverse of a number
         /// @param number the number to find the inverse of
