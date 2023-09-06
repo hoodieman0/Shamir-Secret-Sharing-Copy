@@ -17,6 +17,7 @@ MathNotation.hpp contains the representations used to simplify ShamirSecret func
 
 # Future Plans
 * Making the ShamirSecret class a template class
+* Determining if 12th Mersenne Prime can be used
 
 # References
 * [Purdue University Lecture Shamir Secret Sharing Intro Pt. 1](https://www.cs.purdue.edu/homes/hmaji/teaching/Fall%202020/lectures/08.pdf)
