@@ -24,8 +24,7 @@ class ShamirSecret {
         int secret;
         int minShares;
         int maxShares;
-
-        int prime = 1613;
+        int prime;
 
         bool hasShares = false;
 
@@ -45,7 +44,8 @@ class ShamirSecret {
         /// @param secret the desired int to be hidden, must be positive 
         /// @param min minimum number of keys to decode secret
         /// @param max maxmimum number of keys to generate
-        ShamirSecret(int secret, int min, int max) : secret(secret), minShares(min), maxShares(max) {} ;
+        /// @param prime finite field to use, default is 2^19 - 1 (7th Mersenne Prime)
+        ShamirSecret(int secret, int min, int max, int prime=((int) pow(2, 19)) - 1) : secret(secret), minShares(min), maxShares(max), prime(prime) {} ;
         
         /// @brief fills the polyCoefficients vector and shares vector with their needed values 
 
