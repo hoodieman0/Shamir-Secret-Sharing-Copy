@@ -23,6 +23,7 @@ using namespace std;
 * GenerateTwoShareSetsException
 * EmptyShareSetException
 * UnexpectedResultException
+* IncalculableSecret
 */
 
 // look into stringstreams for use in std::exception::what()
@@ -100,6 +101,17 @@ class UnexpectedResultException : public GeneralException {
     public:
         UnexpectedResultException()=default;
         UnexpectedResultException(int expected, int result) : expected(expected), result(result) {}
+        virtual ostream& print(ostream& out) const;
+};
+
+class IncalculableSecret : public GeneralException {
+    protected:
+        string title = "ShamirSecret Cannot Calculate Secret";
+        string detail = "class cannot be constructed with a secret greater than its finite field (prime)";
+        int code = 106;
+
+    public:
+        IncalculableSecret()=default;
         virtual ostream& print(ostream& out) const;
 };
 

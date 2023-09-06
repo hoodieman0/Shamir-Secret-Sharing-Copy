@@ -47,3 +47,9 @@ print(ostream& out) const {
     out << "Expected Value: " << expected;
     return out;
 }
+
+ostream& IncalculableSecret::
+print(ostream& out) const {
+    out << title << " Code: " << code << " - " << detail;
+    return out;
+}
