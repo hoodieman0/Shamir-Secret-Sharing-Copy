@@ -17,6 +17,7 @@
 #define SECRET 1337
 #define MINSHARES 3
 #define MAXSHARES 5
+#define PRIME 524287 // 7th Mersenne Prime, optional argument
 
 using namespace std;
 
@@ -41,6 +42,23 @@ int UnitTest_ClassCreation() {
     catch(...) { return 1; }
 
     return 0;
+}
+
+/**
+ * @brief check if the ShamirSecret class doesn't construct if prime > secret
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
+int UnitTest_CreateImproperClass() {
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, MAXSHARES, SECRET - 1);
+        cout << "The ShamirSecret class was created" << endl;
+    } 
+    catch(GeneralException& e) { cout << e << endl; return 0; }
+    catch(exception& e) { cout << e.what() << endl; return 0; }
+    catch(...) { return 0; }
+
+    return 1;
 }
 
 /**
@@ -278,8 +296,14 @@ int UnitTest_RunAll(){
     cout << "------------------------------------------------------" << endl;
     
     cout << "Running Unit Test - ClassCreation..." << endl;
-    if (UnitTest_ClassCreation()) { cout << "Unit Test - Class Creation -> Failed Test \u274c" << endl; failed++;}
-    else { cout << "Unit Test - Class Creation -> Passed Test \u2713" << endl; passed++; }
+    if (UnitTest_ClassCreation()) { cout << "Unit Test - ClassCreation -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - ClassCreation -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+    
+    cout << "Running Unit Test - CreateImproperClass..." << endl;
+    if (UnitTest_CreateImproperClass()) { cout << "Unit Test - CreateImproperClass -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - CreateImproperClass -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
 
@@ -307,7 +331,6 @@ int UnitTest_RunAll(){
 
     cout << "------------------------------------------------------" << endl;
     
-
     cout << "Running Unit Test - ReconstructWithTooFewKeys..." << endl;
     if (UnitTest_ReconstructWithTooFewKeys()) { cout << "Unit Test - ReconstructWithTooFewKeys -> Failed Test \u274c" << endl; failed++; }
     else { cout << "Unit Test - ReconstructWithTooFewKeys -> Passed Test \u2713" << endl; passed++; }
