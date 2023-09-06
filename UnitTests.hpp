@@ -45,13 +45,64 @@ int UnitTest_ClassCreation() {
 }
 
 /**
- * @brief check if the ShamirSecret class doesn't construct if prime > secret
+ * @brief check if the ShamirSecret class doesn't construct if secret > prime
  * 
  * @return int 0 on pass, 1 on fail 
  */
 int UnitTest_CreateImproperClass() {
     try {
         ShamirSecret handler(SECRET, MINSHARES, MAXSHARES, SECRET - 1);
+        cout << "The ShamirSecret class was created" << endl;
+    } 
+    catch(GeneralException& e) { cout << e << endl; return 0; }
+    catch(exception& e) { cout << e.what() << endl; return 0; }
+    catch(...) { return 0; }
+
+    return 1;
+}
+
+/**
+ * @brief check if the ShamirSecret class doesn't construct minShares > maxShares
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
+int UnitTest_SwitchMaxMinShares() {
+    try {
+        ShamirSecret handler(SECRET, MAXSHARES, MINSHARES);
+        cout << "The ShamirSecret class was created" << endl;
+    } 
+    catch(GeneralException& e) { cout << e << endl; return 0; }
+    catch(exception& e) { cout << e.what() << endl; return 0; }
+    catch(...) { return 0; }
+
+    return 1;
+}
+
+/**
+ * @brief check if the ShamirSecret class doesn't construct if minShares < 1
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
+int UnitTest_WrongMinShare() {
+    try {
+        ShamirSecret handler(SECRET, 0, MAXSHARES);
+        cout << "The ShamirSecret class was created" << endl;
+    } 
+    catch(GeneralException& e) { cout << e << endl; return 0; }
+    catch(exception& e) { cout << e.what() << endl; return 0; }
+    catch(...) { return 0; }
+
+    return 1;
+}
+
+/**
+ * @brief check if the ShamirSecret class doesn't construct if maxShares < 1
+ * 
+ * @return int 0 on pass, 1 on fail 
+ */
+int UnitTest_WrongMaxShare() {
+    try {
+        ShamirSecret handler(SECRET, MINSHARES, 0);
         cout << "The ShamirSecret class was created" << endl;
     } 
     catch(GeneralException& e) { cout << e << endl; return 0; }
@@ -304,6 +355,24 @@ int UnitTest_RunAll(){
     cout << "Running Unit Test - CreateImproperClass..." << endl;
     if (UnitTest_CreateImproperClass()) { cout << "Unit Test - CreateImproperClass -> Failed Test \u274c" << endl; failed++;}
     else { cout << "Unit Test - CreateImproperClass -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+    
+    cout << "Running Unit Test - WrongMaxShare..." << endl;
+    if (UnitTest_WrongMaxShare()) { cout << "Unit Test - WrongMaxShare -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - WrongMaxShare -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+    
+    cout << "Running Unit Test - WrongMinShare..." << endl;
+    if (UnitTest_WrongMinShare()) { cout << "Unit Test - WrongMinShare -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - WrongMinShare -> Passed Test \u2713" << endl; passed++; }
+
+    cout << "------------------------------------------------------" << endl;
+    
+    cout << "Running Unit Test - SwitchMaxMinShares..." << endl;
+    if (UnitTest_SwitchMaxMinShares()) { cout << "Unit Test - SwitchMaxMinShares -> Failed Test \u274c" << endl; failed++;}
+    else { cout << "Unit Test - SwitchMaxMinShares -> Passed Test \u2713" << endl; passed++; }
 
     cout << "------------------------------------------------------" << endl;
 
